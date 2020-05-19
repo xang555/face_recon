@@ -246,7 +246,7 @@ def run_train_face():
         list_train_images = listdir(image_dir_path)
         for image_name in list_train_images:
             image_path = path.join(image_dir_path, image_name)
-            img_encode = face_encoder.encode(image_path)
+            img_encode = face_encoder.face_encode_from_file(image_path)
             if img_encode is None:
                 continue
             all_face_encodings[image_dir_name] = img_encode

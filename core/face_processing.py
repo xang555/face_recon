@@ -1,4 +1,3 @@
-import face_recognition
 import cv2
 import numpy as np
 import math
@@ -6,7 +5,8 @@ from database import list_know_people_by_id, insert_people_access
 from os import path, getcwd
 from datetime import datetime
 import core.face_detection as fd
-
+import core.face_verification as fveri
+import core.face_encoder as fencodeer
 
 class faceproc:
 
@@ -16,34 +16,44 @@ class faceproc:
         self.resize_frame = resize_frame
         self.camera_id = camera_id
 
+    # detect face and use that face to compare known face fro reconition
     def detect_face_and_recognition(self, rgb_image=None):
 
         if self.known_face_encodings is None or self.known_face_names is None or rgb_image is None:
             raise AttributeError("known_face_encodings, known_face_encodings, rgb_image is None")
 
         face_predictions = []
-
+        
+        # detect face
         face_locations = fd.face_locations(rgb_image)
-        face_encode = face_recognition.face_encodings(rgb_image, face_locations)
+        # encode face lists
+        face_encode = fencodeer.face_encodings(rgb_image, face_locations)
 
+        # loop face list encode 
         for f_encode in face_encode:
-            matches = face_recognition.compare_faces(self.known_face_encodings, f_encode)
+            # compare known face encode and new face encode for checking
+            matches = fveri.compare_faces(self.known_face_encodings, f_encode)
 
             name = 'Unknown'
             acc_percent = 0
 
-            face_distance = face_recognition.face_distance(self.known_face_encodings, f_encode)
+            # calurate face distance for known face lists encode and unknow face encode
+            face_distance = fveri.face_distance(self.known_face_encodings, f_encode)
             best_match_index = np.argmin(face_distance)
             if matches[best_match_index]:
+                # calurate percent similar face 
                 acc = math.floor(self.__face_distance_to_conf(face_distance[best_match_index]) * 100)
+                # if accuracy face compare greater than 80 percent is know face otherwise unknow face
                 if acc >= 80:
                     name = self.known_face_names[best_match_index]
                     acc_percent = acc
 
+            # append name and accuracy in percent
             face_predictions.append((name, acc_percent))
 
         return face_locations, face_predictions
 
+    # preapre output frame after process for showing
     def show_face_recognition(self, frame=None, face_locations=None, face_predictions=None):
 
         for (top, right, bottom, left), (kp_id, acc_percent) in zip(face_locations, face_predictions):
@@ -72,6 +82,7 @@ class faceproc:
 
         return frame
 
+    # save unknow face to database
     def save_face(self, frame, face_locations, face_predictions):
 
         plot_2d_map = []

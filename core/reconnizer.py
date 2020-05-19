@@ -78,11 +78,11 @@ class Reconnizer:
                 process_this_frame = 0
 
             frame = self.face_proc.show_face_recognition(frame.copy(), face_locations, face_predictions)
-            FPS = "FPS: {}".format(int(1.0 / (time() - start_time)))
+            FPS = "FPS: {:5.2f}".format((1.0 / (time() - start_time)))
             cv2.putText(frame, FPS, (0, 50), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 0, 0), 2)
-            # frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
 
-            self.outputFrame = frame.copy()
+            if self.lock:
+                self.outputFrame = frame.copy()
 
     # stream generator function
     def camera_generator(self):
@@ -98,8 +98,10 @@ class Reconnizer:
                 yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
                        bytearray(encodedImage) + b'\r\n')
 
+    # read output frame
     def read(self):
-        return self.outputFrame
+        if self.lock:
+            return self.outputFrame
 
     # start camera
     def start_camera(self, frame_count_for_predict=10):

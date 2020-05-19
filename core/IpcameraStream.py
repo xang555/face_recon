@@ -4,7 +4,7 @@ import threading
 
 class IpcameraStream:
     def __init__(self, uri):
-        self.stream = cv2.VideoCapture(uri)
+        self.stream = cv2.VideoCapture(0)
         self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         if self.stream is None or not self.stream.isOpened():
