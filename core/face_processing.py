@@ -26,6 +26,7 @@ class faceproc:
         
         # detect face
         face_locations = fd.face_locations(rgb_image)
+        
         # encode face lists
         face_encode = fencodeer.face_encodings(rgb_image, face_locations)
 
@@ -33,12 +34,13 @@ class faceproc:
         for f_encode in face_encode:
             # compare known face encode and new face encode for checking
             matches = fveri.compare_faces(self.known_face_encodings, f_encode)
-
+            print(matches)
             name = 'Unknown'
             acc_percent = 0
 
             # calurate face distance for known face lists encode and unknow face encode
             face_distance = fveri.face_distance(self.known_face_encodings, f_encode)
+            print(face_distance)
             best_match_index = np.argmin(face_distance)
             if matches[best_match_index]:
                 # calurate percent similar face 

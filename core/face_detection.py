@@ -1,6 +1,8 @@
 from mtcnn.mtcnn import MTCNN
 import PIL.Image
 import numpy as np
+import PIL.Image
+import numpy as np
 
 detector = MTCNN()
 
@@ -13,6 +15,7 @@ def face_locations(img):
         box = refined_box(x, y, w, h)
         boxes.append(box)
     return boxes
+# convert localization face
 
 
 # laod image from file

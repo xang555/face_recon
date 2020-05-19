@@ -8,7 +8,6 @@ from core.IpcameraStream import IpcameraStream
 from time import time
 import logging
 
-
 class Reconnizer:
 
     def __init__(self, camera_id=None, user_name=None, password=None, ip=None, port=None):
@@ -81,8 +80,7 @@ class Reconnizer:
             FPS = "FPS: {:5.2f}".format((1.0 / (time() - start_time)))
             cv2.putText(frame, FPS, (0, 50), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 0, 0), 2)
 
-            if self.lock:
-                self.outputFrame = frame.copy()
+            self.outputFrame = frame.copy()
 
     # stream generator function
     def camera_generator(self):
@@ -100,8 +98,7 @@ class Reconnizer:
 
     # read output frame
     def read(self):
-        if self.lock:
-            return self.outputFrame
+        return self.outputFrame
 
     # start camera
     def start_camera(self, frame_count_for_predict=10):
