@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 from database import list_know_people_by_id, insert_people_access
-from os import path, getcwd
+from os import path, getcwd, mkdir
 from datetime import datetime
 import core.face_detection as fd
 import face_recognition as fr
@@ -86,8 +86,11 @@ class faceproc:
     # save unknow face to database
     def save_face(self, frame, face_locations, face_predictions):
 
-        plot_2d_map = []
+        # path to images
         _image_path = path.join(getcwd(), 'images')
+        # create images dir if images not found
+        if not path.exists(_image_path):
+            mkdir(_image_path)
 
         for (top, right, bottom, left), (kp_id, acc_percent) in zip(face_locations, face_predictions):
 
@@ -98,8 +101,7 @@ class faceproc:
 
             # if unknown people access
             if acc_percent <= 0:
-                plot_2d_map.append(0)
-                crop_face = frame[top - 20:bottom, left + 5:right]
+                crop_face = frame[top:bottom, left:right]
                 cap_full_image_name = "cap_full_img-{}.jpg".format(datetime.now().strftime('%s'))
                 cap_face_image_name = "cap_face_image-{}.jpg".format(datetime.now().strftime('%s'))
                 cap_full_image_path = path.join(_image_path, cap_full_image_name)

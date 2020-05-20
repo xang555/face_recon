@@ -44,7 +44,6 @@ class Reconnizer:
         diff_frame_count = 4
 
         while self.is_running:
-            start_time = time()
             frame = self.ips.read()
 
             if frame is None or np.shape(frame) == ():
@@ -77,8 +76,6 @@ class Reconnizer:
                 process_this_frame = 0
 
             frame = self.face_proc.show_face_recognition(frame.copy(), face_locations, face_predictions)
-            FPS = "FPS: {:5.2f}".format((1.0 / (time() - start_time)))
-            cv2.putText(frame, FPS, (0, 50), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 0, 0), 2)
 
             if self.lock:
                 self.outputFrame = frame.copy()
