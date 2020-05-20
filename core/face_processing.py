@@ -2,11 +2,10 @@ import cv2
 import numpy as np
 import math
 from database import list_know_people_by_id, insert_people_access
-from os import path, getcwd
+from os import path, getcwd, mkdir
 from datetime import datetime
 import core.face_detection as fd
-import core.face_verification as fveri
-import core.face_encoder as fencodeer
+import face_recognition as fr
 
 class faceproc:
 
@@ -28,19 +27,19 @@ class faceproc:
         face_locations = fd.face_locations(rgb_image)
         
         # encode face lists
-        face_encode = fencodeer.face_encodings(rgb_image, face_locations)
+        face_encode = fr.face_encodings(rgb_image, face_locations)
 
         # loop face list encode 
         for f_encode in face_encode:
             # compare known face encode and new face encode for checking
-            matches = fveri.compare_faces(self.known_face_encodings, f_encode)
-            print(matches)
+            matches = fr.compare_faces(self.known_face_encodings, f_encode)
+
             name = 'Unknown'
             acc_percent = 0
 
             # calurate face distance for known face lists encode and unknow face encode
-            face_distance = fveri.face_distance(self.known_face_encodings, f_encode)
-            print(face_distance)
+            face_distance = fr.face_distance(self.known_face_encodings, f_encode)
+
             best_match_index = np.argmin(face_distance)
             if matches[best_match_index]:
                 # calurate percent similar face 
@@ -87,8 +86,11 @@ class faceproc:
     # save unknow face to database
     def save_face(self, frame, face_locations, face_predictions):
 
-        plot_2d_map = []
+        # path to images
         _image_path = path.join(getcwd(), 'images')
+        # create images dir if images not found
+        if not path.exists(_image_path):
+            mkdir(_image_path)
 
         for (top, right, bottom, left), (kp_id, acc_percent) in zip(face_locations, face_predictions):
 
@@ -99,15 +101,14 @@ class faceproc:
 
             # if unknown people access
             if acc_percent <= 0:
-                plot_2d_map.append(0)
-                crop_face = frame[top - 20:bottom, left + 5:right]
+                crop_face = frame[top:bottom, left:right]
                 cap_full_image_name = "cap_full_img-{}.jpg".format(datetime.now().strftime('%s'))
                 cap_face_image_name = "cap_face_image-{}.jpg".format(datetime.now().strftime('%s'))
                 cap_full_image_path = path.join(_image_path, cap_full_image_name)
                 cap_face_image_path = path.join(_image_path, cap_face_image_name)
 
-                # save image
                 try:
+                    # save image
                     cv2.imwrite(cap_face_image_path, crop_face)
                     cv2.imwrite(cap_full_image_path, frame.copy())
                     # insert to database

@@ -41,4 +41,4 @@ def handle_error(e):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=conf.api_server.get('port', 8080), debug=conf.api_server.get('debug', False),
-            use_reloader=False, threaded=False)
+            use_reloader=False, threaded=True)

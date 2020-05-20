@@ -7,6 +7,7 @@ class IpcameraStream:
         self.stream = cv2.VideoCapture(0)
         self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        self.stream.set(cv2.CAP_PROP_BUFFERSIZE, 3)
         if self.stream is None or not self.stream.isOpened():
             raise Exception("Can not open Camera")
         self.stopped = False
