@@ -33,7 +33,7 @@ $ python3 app.py
 
 ສາມາດເຂົ້າໃຊ້ງານ API ຈາກ URL [http://localhost:8080/api/v1](http://localhost:8080/api/v1)
 
-API Documents [face_recon api docs](asset/face_recon_api_docs.json)
+API router [face_recon api docs](asset/face_recon_api_docs.json)
 
 # TODO
 
@@ -41,3 +41,4 @@ API Documents [face_recon api docs](asset/face_recon_api_docs.json)
 + optimize stream camera
 + create production setup
 + create Docker setup
++ add english readme
