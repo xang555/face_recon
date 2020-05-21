@@ -16,7 +16,7 @@ def feed_video(camera_id):
         rz = reconnizer_arrs[camera_id]
         return Response(rz.camera_generator(), mimetype="multipart/x-mixed-replace; boundary=frame")
     else:
-        no_signal_img = path.join(getcwd(), 'asset', 'no_signal.jpg')
+        no_signal_img = path.join(getcwd(), 'asset', 'images_no_signal.jpg')
         return send_file(no_signal_img)
 
 
