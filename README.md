@@ -8,7 +8,7 @@
 
 # Concept
 
-`face_recon` ເປັນ restful api ທີ່ມີການຈັດການຂໍ້ມູນທີ່ຈະນຳໄປໃຊ້ໃນການລະບຸຕົວຕົນຈາກໃບໜ້າ. ເຊິ່ງລວມເຖິງຮູບພາບທີ່ມີໃບໜ້າທີ່ເຮົາຕ້ອງການກວດສອບ. `face_recon` ຈະໃຊ້ຫຼັກການ face verification ເພື່ອລະບຸຕົວຕົນນັ້ນ.ໝາຍເຖິງການເອົາຮູບໃບໜ້າທີ່ມີຢູ່ໃນຖານຂໍ້ມຸນແລ້ວມາປຽບທຽບກັບຮູບໃບໜ້າທີ່ເຮົາຕ້ອງການກວດສອບ ໂດຍການປຽບທຽບນັ້ນຈະໃຊ້ວິທີຫາໄລຍະຫ່າງລະຫວ່າງ `face embedding vector` ຖ້າຫາກໄລຍະຫ່າງມີຄ່ານ້ອຍຊຳໃດກໍ່ສະແດງວ່າໃບໜ້ານັ້ນມີຄວາມຄືກັນຫຼາຍຊຳນັ້ນ
+`face_recon` ເປັນ restful api ທີ່ມີການຈັດການຂໍ້ມູນທີ່ຈະນຳໄປໃຊ້ໃນການລະບຸຕົວຕົນຈາກໃບໜ້າ. ເຊັ່ນ ຮູບພາບທີ່ມີໃບໜ້າເປັນຕົ້ນ. `face_recon` ຈະໃຊ້ຫຼັກການ face verification ເພື່ອລະບຸຕົວຕົນ ໝາຍເຖິງການເອົາຮູບໃບໜ້າທີ່ມີຢູ່ໃນຖານຂໍ້ມຸນແລ້ວມາປຽບທຽບກັບຮູບໃບໜ້າທີ່ເຮົາຕ້ອງການກວດສອບ ໂດຍການປຽບທຽບນັ້ນຈະໃຊ້ວິທີຫາໄລຍະຫ່າງລະຫວ່າງ `face embedding vector` ຖ້າຫາກໄລຍະຫ່າງມີຄ່ານ້ອຍຊຳໃດກໍ່ສະແດງວ່າໃບໜ້ານັ້ນມີຄວາມຄືກັນຫຼາຍຊຳນັ້ນ
 
 # Deshboard
 
@@ -27,7 +27,7 @@ face_recon ມີ Web UI ໃຫ້ໃຊ້ງານງ່າຍໆ ສາມາ
 + mtcnn  deep learning face detection [install mtcnn](https://github.com/ipazc/mtcnn)
 + opencv for python [install opencv for python](https://pypi.org/project/opencv-python/)
 
- ການຕິດຕັ້ງແມ່ນໃຊ້ `pip3` ຫຼັງຈາກນັ້ນເຂົ້າໄປທີ່ `root` project ແລ້ວໃຊ້ຄຳສັ່ງ
+ ການຕິດຕັ້ງແມ່ນໃຊ້ `pip3` ຫຼັງຈາກນັ້ນ clone project ແລະ ເຂົ້າໄປທີ່ `root`ຂອງ project ແລ້ວໃຊ້ຄຳສັ່ງ
 
  ```command
  $ pip3 install -r requirements.txt
@@ -43,7 +43,7 @@ $ python3 app.py
 
 ສາມາດເຂົ້າໃຊ້ງານ API ຈາກ URL [http://localhost:8080/api/v1](http://localhost:8080/api/v1)
 
-API router [face_recon api docs](asset/face_recon_api_docs.json)
+API router [face_recon api router in json formate](asset/face_recon_api_docs.json)
 
 #### use webcame
 
