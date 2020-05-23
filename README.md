@@ -45,7 +45,7 @@ $ python3 app.py
 
 API router [face_recon api router in json formate](asset/face_recon_api_docs.json)
 
-#### use webcame
+#### Test with webcame
 
 ສຳລັບຄົນທີ່ບໍ່ມີ IP camera ຕ້ອງການທົດສອບຜ່ານ webcame ສາມາດເຮັດໄດ້ໂດຍໄປແກ້ໄຂ file `core/IpcameraStream.py`
 ໂດຍປ່ຽນຈາກ `url` ເປັນ number ຫຼື io path ຂອງ camera ນັ້ນ ຕົວຢ່າງເຊັ່ນ ຕ້ອງການໃຊ້ `built-in camera` ຂອງ notebook ສາມາດລະບຸເປັນເລກ `0` ຫຼື /dev/video0 ສຳລັບ linux/macos
