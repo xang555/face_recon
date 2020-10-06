@@ -1,3 +1,5 @@
+[lao document version](https://github.com/xang555/face_recon/blob/master/README.md) | [English document version](https://github.com/xang555/face_recon/blob/master/README.en.md)
+
 # face_recon
 
 `face_recon` is a RESTful API implementing `face recognition` system developed with Python and Flask framework which can connect to IP camera that support RTSP protocol.
