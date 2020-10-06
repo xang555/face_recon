@@ -1,4 +1,4 @@
-[lao document version](https://github.com/xang555/face_recon/blob/master/README.md) | [English document version](https://github.com/xang555/face_recon/blob/master/README.en.md)
+[Lao document version](https://github.com/xang555/face_recon/blob/master/README.md) | [English document version](https://github.com/xang555/face_recon/blob/master/README.en.md)
 # face_recon
 
 `face_recon` ຄື restful api ທີ່ implement `face recognition` system ພັດທະນາໂດຍໃຊ້ `Python` ແລະ `Flask` http framework ສາມາດເຊື່ອຕໍ່ Ip camera ທີ່ suport protocol `rtsp`
